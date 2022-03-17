@@ -1,9 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class LobbyOverlay : Overlay
 {
     [SerializeField] private Button _singePlayerButton;
+
+    [Inject] public SignalBus SignalsBus { get; set; }
 
     private void Awake()
     {
@@ -12,6 +15,6 @@ public class LobbyOverlay : Overlay
 
     private void StartLocalPlayerGame()
     {
-        Debug.Log("start local player");
+        SignalsBus.Fire<StartLocalSessionSignal>();
     }
 }

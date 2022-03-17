@@ -11,10 +11,10 @@ public class OverlayController : MonoBehaviour
     {
         _overlays.AddRange(GetComponentsInChildren<Overlay>());
 
-        foreach (var overlay in _overlays)
-        {
-            DisableOverlay(overlay.GetType());
-        }
+        //foreach (var overlay in _overlays)
+        //{
+        //    DisableOverlay(overlay.GetType());
+        //}
     }
 
     public static void EnableOverlay(Type overlayType)
