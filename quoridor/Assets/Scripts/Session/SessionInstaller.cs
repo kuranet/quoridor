@@ -12,8 +12,12 @@ public class SessionInstaller : Installer
             .To<PlayersHandler>()
             .AsSingle();
 
+        Container.Bind<SessionStateController>()
+            .ToSelf()
+            .AsSingle();
+
         Container.DeclareSignal<StartLocalSessionSignal>();
         Container.BindSignal<StartLocalSessionSignal>()
-            .ToMethod(() => UnityEngine.Debug.Log("start local player"));
+            .ToMethod<StartLocalSessionCommand>(x => x.Execute).FromNew();
     }
 }
