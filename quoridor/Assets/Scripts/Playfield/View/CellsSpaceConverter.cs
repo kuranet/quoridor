@@ -39,6 +39,6 @@ public class CellsSpaceConverter : ICellSpaceConverter
     {
         var directionVector = worldPosition - _zeroPositionWorld;
 
-        return Vector2Int.zero;
+        return new Vector2Int((int)directionVector.x, (int)directionVector.z);
     }
 }

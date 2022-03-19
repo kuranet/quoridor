@@ -36,7 +36,7 @@ public class PlayfieldMediator : MonoBehaviour
                 cell.Initialize(cellPosition);
 
                 var worldPosition = CellSpaceConverter.CellToWorld(cellPosition);
-                cell.transform.position = worldPosition;
+                cell.WorldPosition = worldPosition;
 
                 cell.name = $"cell_({i},{j})";
                 _cells.Add(cell);

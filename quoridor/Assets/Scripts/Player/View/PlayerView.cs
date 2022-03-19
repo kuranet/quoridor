@@ -41,6 +41,11 @@ public class PlayerView : MonoBehaviour, IDraggable
         SignalBus.Fire(new PlayerDragStateChangedSignal(PlayerId, isDragged));
     }
 
+    public void CancelDrag()
+    {
+        WorldPosition = WorldPosition;
+    }
+
     public void EndDrag()
     {
         Debug.Log("end drag");

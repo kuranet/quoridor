@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public interface IDraggable
+public interface IDraggable : IInteractable
 {
-    bool IsInteractable { get; }
     Vector3 DragPosition { get; set; }
 
     void StartDtag();
+    void CancelDrag();
     void EndDrag();
 }

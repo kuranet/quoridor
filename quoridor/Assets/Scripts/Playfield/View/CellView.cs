@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CellView : MonoBehaviour
+public class CellView : MonoBehaviour, IPlacable
 {
     [SerializeField] private Color _interactableColor;
     [SerializeField] private Color _notInteractableColor;
@@ -21,6 +21,12 @@ public class CellView : MonoBehaviour
             var goColor = _isInteractable ? _interactableColor : _notInteractableColor;
             gameObject.GetComponent<Renderer>().material.SetColor("_Color", goColor);
         }
+    }
+
+    public Vector3 WorldPosition
+    {
+        get => transform.position;
+        set => transform.position = value;
     }
 
     public void Initialize(Vector2Int position)

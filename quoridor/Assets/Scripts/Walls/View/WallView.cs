@@ -29,12 +29,15 @@ public class WallView : MonoBehaviour, IDraggable
         _ghostView.gameObject.SetActive(false);
     }
 
+    public void CancelDrag()
+    {
+    }
+
     private void Update()
     {
         if (_isDragger == false)
             return;
 
         var isRotationKeyPressed = Input.GetKeyDown(KeyCode.Space);
-
     }
 }

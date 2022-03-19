@@ -29,7 +29,7 @@ public class DragProcessor : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Draggable = GetDraggable();
+            Draggable = GetInteractable<IDraggable>();
         }
         else if (Input.GetMouseButton(0))
         {
@@ -44,25 +44,32 @@ public class DragProcessor : MonoBehaviour
             if (Draggable == null)
                 return;
 
-            var worldPosition = GetDragPosition();
-            SignalBus.Fire(new SetDraggablePositionSignal(Draggable, worldPosition));
+            var placable = GetInteractable<IPlacable>();
+            if (placable == null)
+            {
+                Draggable.CancelDrag();
+            }
+            else
+            {
+                SignalBus.Fire(new SetDraggablePositionSignal(Draggable, placable.WorldPosition));
+            }
 
             Draggable = null;
         }
     }
 
-    private IDraggable GetDraggable()
+    private T GetInteractable<T>() where T : IInteractable
     {
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         var raycastAll = Physics.RaycastAll(ray);
         foreach (var raycasted in raycastAll)
         {
-            if (raycasted.collider.gameObject.TryGetComponent(out IDraggable draggable) && draggable.IsInteractable)
+            if (raycasted.collider.gameObject.TryGetComponent(out T draggable) && draggable.IsInteractable)
                 return draggable;
         }
 
-        return null;
+        return default(T);
     }
 
     private Vector3 GetDragPosition()
