@@ -1,17 +1,25 @@
+using UnityEngine;
+using Zenject;
+
 public class PlayerController : IPlayerController
 {
     private const int _turnDurationTicks = 100000;
     private int _ticksSinceTurnStart;
 
-    public bool IsCurrentTurn { get; set; }
+    private IPlayerState _playerState;
 
-    public int Id { get; private set; }
+    public bool IsCurrentTurn { get; private set; }
+
+    public int Id => _playerState.Id;
 
     public bool IsReady { get; set; }
 
-    public void Initialize(int playerId)
+    [Inject] public SignalBus SignalBus { get; set; }
+    [Inject] public IPlayfieldController PlayfieldController { get; private set; }
+
+    public void Initialize(IPlayerState playerState)
     {
-        Id = playerId;
+        _playerState = playerState;
     }
 
     public void SimulationStep()
@@ -20,16 +28,6 @@ public class PlayerController : IPlayerController
 
         if (_ticksSinceTurnStart >= _turnDurationTicks)
             CompleteTurn();
-    }
-
-    public void MovePlayer()
-    {
-
-    }
-
-    public void SetBorder()
-    {
-
     }
 
     public void StartTurn()
@@ -41,5 +39,18 @@ public class PlayerController : IPlayerController
     public void CompleteTurn()
     {
         IsCurrentTurn = false;
+    }
+
+    public void SetPlayerPosition(Vector2Int cellPosition)
+    {
+        if (PlayfieldController.CanSetPosition(Id, cellPosition) == false)
+            return;
+
+        _playerState.Position = cellPosition;
+        SignalBus.Fire<PlayerPositionsChangedSignal>();
+    }
+
+    public void SetWall()
+    {
     }
 }

@@ -11,9 +11,12 @@ public class PlayfieldMediator : MonoBehaviour
 
     [Inject] public IPlayfieldController PlayfieldController { get; set; }
     [Inject] public ICellSpaceConverter CellSpaceConverter { get; set; }
+    [Inject] public SignalBus SignalBus { get; set; }
 
     private void Start()
     {
+        SignalBus.Subscribe<PlayerDragStateChangedSignal>(x => OnPlayerDragChanged(x.PlayerId, x.IsDragged));
+
         CreateField();
     }
 
@@ -41,7 +44,19 @@ public class PlayfieldMediator : MonoBehaviour
         }
     }
 
-    public void ShowAvailable(int playerId)
+    private void OnPlayerDragChanged(int playerId, bool isDragged)
+    {
+        if (isDragged)
+        {
+            ShowAvailable(playerId);
+        }
+        else
+        {
+            DisableCells();
+        }
+    }
+
+    private void ShowAvailable(int playerId)
     {
         foreach (var cell in _cells)
         {
@@ -49,7 +64,7 @@ public class PlayfieldMediator : MonoBehaviour
         }
     }
 
-    public void DisableCells()
+    private void DisableCells()
     {
         foreach (var cell in _cells)
         {

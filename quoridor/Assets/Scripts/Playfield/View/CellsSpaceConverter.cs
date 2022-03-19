@@ -25,7 +25,7 @@ public class CellsSpaceConverter : ICellSpaceConverter
         _zeroPositionWorld = Vector3.zero;
     }
 
-    public Vector3 CellToWorld(Vector2 cellPosition)
+    public Vector3 CellToWorld(Vector2Int cellPosition)
     {
         var xPosition = cellPosition.x * _cellSizeX + (cellPosition.x - 1) * _cellDistanceX;
         var yPosition = cellPosition.y * _cellSizeY + (cellPosition.y - 1) * _cellDistanceY;
@@ -33,5 +33,12 @@ public class CellsSpaceConverter : ICellSpaceConverter
         var fromStartPosition = new Vector3(xPosition, 0, yPosition);
 
         return fromStartPosition;
+    }
+
+    public Vector2Int WorldToCell(Vector3 worldPosition)
+    {
+        var directionVector = worldPosition - _zeroPositionWorld;
+
+        return Vector2Int.zero;
     }
 }

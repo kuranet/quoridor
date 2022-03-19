@@ -5,7 +5,7 @@ public class CellView : MonoBehaviour
     [SerializeField] private Color _interactableColor;
     [SerializeField] private Color _notInteractableColor;
 
-    private bool _isInteractable;
+    private bool _isInteractable = true;
     public Vector2Int Position { get; private set; }
 
     public bool IsInteractable

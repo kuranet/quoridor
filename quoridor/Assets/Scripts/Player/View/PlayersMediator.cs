@@ -28,7 +28,7 @@ public class PlayersMediator : MonoBehaviour
         {
             var playerView = GetPlayer(player.Id);
             var playerPosition = CellSpaceConverter.CellToWorld(player.Position);
-            playerView.transform.position = playerPosition;
+            playerView.WorldPosition = playerPosition;
         }
     }
 

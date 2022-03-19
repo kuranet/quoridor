@@ -4,6 +4,8 @@ using UnityEngine;
 
 public interface IPlayersHandler
 {
+    List<IPlayerController> PlayerControllers { get; }
+
     void SimulationStep();
     void AddController(IPlayerController playerController);
 }

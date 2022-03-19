@@ -4,5 +4,5 @@ public interface IPlayerState
 {
     int Id { get; }
 
-    Vector2Int Position { get; }
+    Vector2Int Position { get; set; }
 }

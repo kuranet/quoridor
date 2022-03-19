@@ -24,7 +24,7 @@ public class PlayfieldController : IPlayfieldController
 
         var directionVector = position - currentPlayer.Position;
 
-        var isBordering = directionVector.magnitude == 1;
+        var isBordering = Vector2Int.Distance(position, currentPlayer.Position) == 1;
         if (isBordering)
         {
             // check if closed by wall;
@@ -32,6 +32,7 @@ public class PlayfieldController : IPlayfieldController
         else
         {
             // check if opponent near.
+            return false;
         }
 
         return true;

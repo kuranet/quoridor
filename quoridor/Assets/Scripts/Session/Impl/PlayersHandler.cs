@@ -5,6 +5,8 @@ public class PlayersHandler : IPlayersHandler
 {
     private readonly List<IPlayerController> _playerControllers = new List<IPlayerController>();
 
+    public List<IPlayerController> PlayerControllers => _playerControllers;
+
     public void SimulationStep()
     {
         var activePlayer = _playerControllers.FirstOrDefault(p => p.IsCurrentTurn);

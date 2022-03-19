@@ -9,5 +9,6 @@ public class ContextInstaller : MonoInstaller
         Container.Install<SessionInstaller>();
         Container.Install<PlayfieldInstaller>();
         Container.Install<WallsInstaller>();
+        Container.Install<DraggableInstaller>();
     }
 }

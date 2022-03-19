@@ -16,10 +16,10 @@ public class StartLocalSessionCommand
 
         SessionStateController.Initialize(PlayersCount);
 
-        for (var i = 0; i < PlayersCount; i++)
+        foreach(var state in SessionStateController.SessionState.Players)
         {
             var playerController = Container.Instantiate<PlayerController>();
-            playerController.Initialize(i);
+            playerController.Initialize(state);
             PlayersHandler.AddController(playerController);
         }
     }
