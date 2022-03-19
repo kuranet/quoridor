@@ -6,10 +6,11 @@ public class PlayerState : IPlayerState
 
     public Vector2Int Position { get; set; }
 
-    public int BordersCount { get; set; }
+    public int WallsCount { get; set; }
 
-    public PlayerState(int id)
+    public PlayerState(int id, int wallsCount)
     {
         Id = id;
+        WallsCount = wallsCount;
     }
 }

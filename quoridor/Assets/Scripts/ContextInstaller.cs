@@ -7,5 +7,7 @@ public class ContextInstaller : MonoInstaller
         SignalBusInstaller.Install(Container);
 
         Container.Install<SessionInstaller>();
+        Container.Install<PlayfieldInstaller>();
+        Container.Install<WallsInstaller>();
     }
 }

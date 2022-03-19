@@ -19,5 +19,7 @@ public class SessionInstaller : Installer
         Container.DeclareSignal<StartLocalSessionSignal>();
         Container.BindSignal<StartLocalSessionSignal>()
             .ToMethod<StartLocalSessionCommand>(x => x.Execute).FromNew();
+
+        Container.DeclareSignal<PlayerPositionsChangedSignal>();
     }
 }

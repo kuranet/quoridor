@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
-using Zenject;
 
 public class SessionState : ISessionState
 {
@@ -8,14 +6,12 @@ public class SessionState : ISessionState
 
     public List<IPlayerState> Players => _players;
 
-    public void AddPlayer(int playerId)
-    {
-        var playerModel = new PlayerState(playerId);
-        _players.Add(playerModel);
-    }
+    public GameState GameState { get; set; }
 
     public void Reset()
     {
         _players.Clear();
+
+        GameState = GameState.Preparing;
     }
 }
