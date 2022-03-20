@@ -12,7 +12,4 @@ public interface IPlayerController
     void Initialize(IPlayerState playerState);
 
     public void SimulationStep();
-
-    public void SetPlayerPosition(Vector2Int cellPosition);
-    public void SetWall();
 }

@@ -25,22 +25,19 @@ public class PlayfieldMediator : MonoBehaviour
         var borderSize = PlayfieldController.Configuration.BoarderSize;
         CellSpaceConverter.Initialize(borderSize);
 
-        for (var i = 0; i < borderSize; i++)
+        foreach (var cellModel in PlayfieldController.Cells)
         {
-            for (var j = 0; j < borderSize; j++)
-            {
-                var cell = Instantiate(_cellPrefab, _cellsContainer);
+            var cell = Instantiate(_cellPrefab, _cellsContainer);
 
-                var cellPosition = new Vector2Int(i, j);
+            var cellPosition = cellModel.Position;
 
-                cell.Initialize(cellPosition);
+            cell.Initialize(cellModel.Position);
 
-                var worldPosition = CellSpaceConverter.CellToWorld(cellPosition);
-                cell.WorldPosition = worldPosition;
+            var worldPosition = CellSpaceConverter.CellToWorld(cellPosition);
+            cell.WorldPosition = worldPosition;
 
-                cell.name = $"cell_({i},{j})";
-                _cells.Add(cell);
-            }
+            cell.name = $"cell_({cellPosition.x},{cellPosition.y})";
+            _cells.Add(cell);
         }
     }
 

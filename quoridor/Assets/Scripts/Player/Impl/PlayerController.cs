@@ -14,9 +14,6 @@ public class PlayerController : IPlayerController
 
     public bool IsReady { get; set; }
 
-    [Inject] public SignalBus SignalBus { get; set; }
-    [Inject] public IPlayfieldController PlayfieldController { get; private set; }
-
     public void Initialize(IPlayerState playerState)
     {
         _playerState = playerState;
@@ -39,18 +36,5 @@ public class PlayerController : IPlayerController
     public void CompleteTurn()
     {
         IsCurrentTurn = false;
-    }
-
-    public void SetPlayerPosition(Vector2Int cellPosition)
-    {
-        if (PlayfieldController.CanSetPosition(Id, cellPosition) == false)
-            return;
-
-        _playerState.Position = cellPosition;
-        SignalBus.Fire<PlayerPositionsChangedSignal>();
-    }
-
-    public void SetWall()
-    {
     }
 }

@@ -7,6 +7,7 @@ public class PlayerState : IPlayerState
     public Vector2Int Position { get; set; }
 
     public int WallsCount { get; set; }
+    public bool IsCurrentTurn { get; set; }
 
     public PlayerState(int id, int wallsCount)
     {
